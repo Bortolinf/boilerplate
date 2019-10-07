@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:prodesys_mobi/src/domain/singleton.dart';
+import 'package:prodesys_mobi/src/utils/nav.dart';
 //import 'package:prodesys_mobi/pages/clientes_page.dart';
 //import 'package:prodesys_mobi/pages/produtos_page.dart';
 //import 'package:prodesys_mobi/pages/programacao_page.dart';
 //import 'package:prodesys_mobi/pages/relatorios_page.dart';
 import 'package:prodesys_mobi/src/widgets/custom_drawer.dart';
 import 'package:prodesys_mobi/src/widgets/menu_button.dart';
+
+import 'clientes_page.dart';
 
 
 const Color _kFlutterBlue = Color(0xFF003D75);
@@ -44,7 +47,7 @@ class HomePage extends StatelessWidget {
 
   _body2(context) {
     List<ItemMenu> menuItens = [
-     // ItemMenu("Meus Clientes", Icon(Icons.people, size: 50.0, color: _kFlutterBlue,), onClickClientes),
+      ItemMenu("Meus Clientes", Icon(Icons.people, size: 50.0, color: _kFlutterBlue,), onClickClientes),
       ItemMenu("Produtos", Icon(Icons.shopping_basket, size: 50.0, color: _kFlutterBlue,), onClickProdutos),
     //  ItemMenu("Programação", Icon(Icons.date_range, size: 50.0, color: _kFlutterBlue,), onClickProgramacao),
     //  ItemMenu("Finanças", Icon(Icons.monetization_on, size: 50.0, color: _kFlutterBlue,) ,onClickFinancas),
@@ -90,6 +93,11 @@ _itemView(context, List<ItemMenu> menuItens, int index) {
    print(appData.wtlUser.email);
   }
 
+
+  void onClickClientes(BuildContext context) async {
+    String s = await push(context, ClientesPage());
+   // print(">> $s");
+  }
 
 
 

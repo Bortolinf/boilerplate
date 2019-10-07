@@ -13,9 +13,7 @@ class Clientes extends Table {
 
 }
 
-
-// o Jacob fez algumas alteracoes aqui nesta classe para que ela fique
-// em singleton
+// o Jacob fez algumas alteracoes aqui nesta classe para que ela fique em singleton
 @UseMoor(tables: [Produtos, Clientes])
 class MyDatabase extends _$MyDatabase {
 
@@ -28,12 +26,38 @@ class MyDatabase extends _$MyDatabase {
     return select(produtos).get();
   }
 
-  // construtores p/retornar dados
-  Future getAllClientes(){
-    return select(clientes).get();
+  // construtores p/retornar dados - estatico
+  //Future getAllClientes(){
+  //  return select(clientes).get();
+  //}
+ // construtores p/retornar dados - reativo
+  Stream getAllClientes(){
+    return select(clientes).watch();
+  }
+ 
+  // inclusao de registro
+  Future addCliente(Cliente cliente){
+    return into(clientes).insert(cliente);
+  }
+
+  Future updateCliente(Cliente cliente) {
+    return update(clientes).replace(cliente);
+  }
+
+  // exclusao de dados
+  Future deleteCliente(id) {
+    // METODO 1
+    // return (delete(clientes)..where((cliente) => cliente._id.equals(id))).go();
+    // METODO 2
+    var query = delete(clientes);
+    query.where((cliente) => cliente._id.equals(id));
+    return query.go();
   }
 
 
+
+
+  // 
 
   @override
   int get schemaVersion => 1; 
