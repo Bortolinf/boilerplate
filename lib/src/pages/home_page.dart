@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prodesys_mobi/src/domain/singleton.dart';
+import 'package:prodesys_mobi/src/pages/sincro_page.dart';
 import 'package:prodesys_mobi/src/utils/nav.dart';
 //import 'package:prodesys_mobi/pages/clientes_page.dart';
 //import 'package:prodesys_mobi/pages/produtos_page.dart';
@@ -34,7 +35,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
  
     
-    return Scaffold(
+    return
+    Scaffold(
       appBar: AppBar(
         title: Text("Prodesys Mobi"),
       ),
@@ -49,7 +51,7 @@ class HomePage extends StatelessWidget {
     List<ItemMenu> menuItens = [
       ItemMenu("Meus Clientes", Icon(Icons.people, size: 50.0, color: _kFlutterBlue,), onClickClientes),
       ItemMenu("Produtos", Icon(Icons.shopping_basket, size: 50.0, color: _kFlutterBlue,), onClickProdutos),
-    //  ItemMenu("Programação", Icon(Icons.date_range, size: 50.0, color: _kFlutterBlue,), onClickProgramacao),
+      ItemMenu("Sincronizar", Icon(Icons.swap_vert, size: 50.0, color: _kFlutterBlue,), onClickSincro),
     //  ItemMenu("Finanças", Icon(Icons.monetization_on, size: 50.0, color: _kFlutterBlue,) ,onClickFinancas),
     //  ItemMenu("Relatórios", Icon(Icons.receipt, size: 50.0, color: _kFlutterBlue,) ,onClickRelatorios),
     ];
@@ -96,9 +98,14 @@ _itemView(context, List<ItemMenu> menuItens, int index) {
 
   void onClickClientes(BuildContext context) async {
     String s = await push(context, ClientesPage());
-   // print(">> $s");
+    print(">> $s");
   }
 
+
+  void onClickSincro(BuildContext context) async {
+    String s = await push(context, SincroPage());
+    print(">> $s");
+  }
 
 
 } // fim de tudo

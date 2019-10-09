@@ -31,6 +31,7 @@ class UserRepository with ChangeNotifier {
     //  await loadCurrentUser();
      return true;
     } catch (e) {
+      print("erro ao logar: $e");
       _status = Status.Unauthenticated;
       notifyListeners();
       return false;

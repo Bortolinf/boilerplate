@@ -39,8 +39,9 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
                   controller: _email,
-                  validator: (value) =>
-                      (value.isEmpty || !value.contains("@")) ? "Informe um E-mail Válido" : null,
+                  validator: (value) => (value.isEmpty || !value.contains("@"))
+                      ? "Informe um E-mail Válido"
+                      : null,
                   style: style,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
@@ -52,8 +53,9 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
                   controller: _password,
-                  validator: (value) =>
-                      (value.isEmpty ?? value.length < 6 ) ? "Informe uma senha" : null,
+                  validator: (value) => (value.isEmpty ?? value.length < 6)
+                      ? "Informe uma senha"
+                      : null,
                   style: style,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
@@ -61,38 +63,32 @@ class _LoginPageState extends State<LoginPage> {
                       border: OutlineInputBorder()),
                 ),
               ),
-
-
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: FlatButton(
-                            onPressed: () {
-                              if (_email.text.isEmpty)
-                                _key.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      "Insira seu e-mail para recuperação!"),
-                                  backgroundColor: Colors.redAccent,
-                                  duration: Duration(seconds: 2),
-                                ));
-                              else {
-                                user.recoverPass(_email.text);
-                                _key.currentState.showSnackBar(SnackBar(
-                                  content: Text("Confira seu e-mail"),
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  duration: Duration(seconds: 2),
-                                ));
-                              }
-                            },
-                            child: Text(
-                              "Esqueci minha senha",
-                              textAlign: TextAlign.right,
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                          ),
-                        ),
-
-
+              Align(
+                alignment: Alignment.centerRight,
+                child: FlatButton(
+                  onPressed: () {
+                    if (_email.text.isEmpty)
+                      _key.currentState.showSnackBar(SnackBar(
+                        content: Text("Insira seu e-mail para recuperação!"),
+                        backgroundColor: Colors.redAccent,
+                        duration: Duration(seconds: 2),
+                      ));
+                    else {
+                      user.recoverPass(_email.text);
+                      _key.currentState.showSnackBar(SnackBar(
+                        content: Text("Confira seu e-mail"),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        duration: Duration(seconds: 2),
+                      ));
+                    }
+                  },
+                  child: Text(
+                    "Esqueci minha senha",
+                    textAlign: TextAlign.right,
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                ),
+              ),
               user.status == Status.Authenticating
                   ? Center(child: CircularProgressIndicator())
                   : Padding(
@@ -121,9 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
               SizedBox(height: 20),
-
-
-
               user.status == Status.Authenticating
                   ? Container()
                   : Padding(
@@ -141,14 +134,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           onPressed: () async {
                             user.newUser();
-                           // Navigator.of(context).pop();
+                            // Navigator.of(context).pop();
                           },
                         ),
                       ),
                     ),
-
-
-
             ],
           ),
         ),

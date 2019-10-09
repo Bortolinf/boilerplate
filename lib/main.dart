@@ -1,26 +1,24 @@
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:prodesys_mobi/src/models/user_repository.dart';
-import 'package:prodesys_mobi/src/screens/home_screen.dart';
-import 'package:prodesys_mobi/src/screens/login_screen.dart';
-import 'package:prodesys_mobi/src/screens/signup_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:prodesys_mobi/src/pages/home_page.dart';
+import 'package:prodesys_mobi/src/pages/login_page.dart';
+import 'package:prodesys_mobi/src/pages/signup_page.dart';
+import 'package:prodesys_mobi/src/utils/network_check.dart';
+import 'package:provider/provider.dart' as providerU;
+import 'package:bloc_pattern/bloc_pattern.dart';
 
+void main() { 
+  
+  runApp(MyApp());
 
-void main() => runApp(MyApp());
+}
+
 
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate
-            ],
-            supportedLocales: [
-              const Locale('pt', 'BR')
-            ],
             key: Key('materialapp'),
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -37,9 +35,14 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return  BlocProvider(
+      blocs: [
+        Bloc((i) => ConnectionStatusBloc()),
+      ],
+      child: 
+     providerU.ChangeNotifierProvider(
       builder: (_) => UserRepository.instance(),
-      child: Consumer(
+      child: providerU.Consumer(
         builder: (context, UserRepository user, _) {
           switch (user.status) {
             case Status.Uninitialized:
@@ -52,11 +55,14 @@ class HomeScreen extends StatelessWidget {
             case Status.NewUser:
             case Status.Registering:
             case Status.Unregistred:
-              return SignUpScreen();
+              return SignUpPage();
           }
+          return null; // para nao dar erro
         },
       ),
+    ),
     );
+    
   }
 }
 

@@ -6,12 +6,12 @@ import 'package:provider/provider.dart';
 
 
 
-class SignUpScreen extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
