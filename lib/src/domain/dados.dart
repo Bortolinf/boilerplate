@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:prodesys_mobi/src/domain/singleton.dart';
 
 class ClienteData {
-  String id;
+  int id;
   String nome;
   String endereco;
   String telefone;
@@ -14,7 +14,7 @@ class ClienteData {
 
   // contrutor q cria o objeto a partir do snapshot
   ClienteData.fromDocument(DocumentSnapshot snapshot){
-    id = snapshot.documentID;
+    id = int.parse(snapshot.documentID);
     nome = snapshot.data["nome"];
     endereco = snapshot.data["endereco"];
     telefone = snapshot.data["telefone"];

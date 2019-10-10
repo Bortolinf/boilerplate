@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:prodesys_mobi/src/blocs/ConnectionStatusBloc.dart';
 import 'package:prodesys_mobi/src/models/user_repository.dart';
 import 'package:prodesys_mobi/src/pages/home_page.dart';
 import 'package:prodesys_mobi/src/pages/login_page.dart';
 import 'package:prodesys_mobi/src/pages/signup_page.dart';
-import 'package:prodesys_mobi/src/utils/network_check.dart';
 import 'package:provider/provider.dart' as providerU;
 import 'package:bloc_pattern/bloc_pattern.dart';
 

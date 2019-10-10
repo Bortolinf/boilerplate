@@ -1,7 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:prodesys_mobi/src/blocs/ConnectionStatusBloc.dart';
 import 'package:prodesys_mobi/src/utils/alerts.dart';
-import 'package:prodesys_mobi/src/utils/network_check.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 ProgressDialog pr;

@@ -1,4 +1,8 @@
 import 'package:moor_flutter/moor_flutter.dart';
+import 'package:prodesys_mobi/src/db/dao/ClienteDAO.dart';
+
+import 'dao/ConfigurationDAO.dart';
+import 'dao/ProdutoDAO.dart';
 part 'my_database.g.dart';
 
 class Produtos extends Table {
@@ -10,7 +14,6 @@ class Produtos extends Table {
 class Clientes extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get nome => text().withLength(min: 2, max: 40)();
-
 }
 
 
@@ -27,46 +30,21 @@ class Configurations extends Table {
 class MyDatabase extends _$MyDatabase {
 
   static final MyDatabase instance = MyDatabase._internal();
+  ProdutoDAO produtoDAO;
+  ClienteDAO clienteDAO;
+  ConfigurationDAO configurationDAO;
 
-  MyDatabase._internal() : super(FlutterQueryExecutor.inDatabaseFolder(path: 'db.sqlite'));
-
-  // construtores p/retornar dados
-  Future getAllProdutos(){
-    return select(produtos).get();
-  }
-
-  // construtores p/retornar dados - estatico
-  //Future getAllClientes(){
-  //  return select(clientes).get();
-  //}
- // construtores p/retornar dados - reativo
-  Stream getAllClientes(){
-    return select(clientes).watch();
-  }
- 
-  // inclusao de registro
-  Future addCliente(Cliente cliente){
-    return into(clientes).insert(cliente);
-  }
-
-  Future updateCliente(Cliente cliente) {
-    return update(clientes).replace(cliente);
-  }
-
-  // exclusao de dados
-  Future deleteCliente(id) {
-    // METODO 1
-    // return (delete(clientes)..where((cliente) => cliente._id.equals(id))).go();
-    // METODO 2
-    var query = delete(clientes);
-    query.where((cliente) => cliente._id.equals(id));
-    return query.go();
+  MyDatabase._internal() : super(FlutterQueryExecutor.inDatabaseFolder(path: 'db.sqlite')){
+   // instancia o clienteDAO vinculando ele ao MyDatabase, representado aqui pelo 'instante'
+   clienteDAO = ClienteDAO(this);
+   produtoDAO = ProdutoDAO(this);
+   configurationDAO = ConfigurationDAO(this);
   }
 
 
 
 
-  // 
+
 
   @override
   int get schemaVersion => 1; 

@@ -1,22 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prodesys_mobi/src/db/my_database.dart';
+import 'package:prodesys_mobi/src/domain/singleton.dart';
+
+import 'edtCliente_page.dart';
 
 class ClientesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     // temporario para testar registros
-    MyDatabase.instance.addCliente(Cliente(id: 1, nome: "joaozinho de Deus"));
-    MyDatabase.instance.addCliente(Cliente(id: 2, nome: "Maria Bonita"));
+   // MyDatabase.instance.clienteDAO.addCliente(Cliente(id: 1, nome: "joaozinho de Deus"));
+   // MyDatabase.instance.clienteDAO.addCliente(Cliente(id: 2, nome: "Maria Bonita"));
 
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Clientes") ,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.edit), onPressed: (){
+          IconButton(icon: Icon(Icons.add), onPressed: (){
+            appData.wtlopc = "I";
+            Navigator.push(context, CupertinoPageRoute(builder: (context){
+              return AddClientePage();
+            }));
             // teste de update
-            MyDatabase.instance.updateCliente((Cliente(id: 1, nome: "joaozinho Troca Nome")));
+            //MyDatabase.instance.clienteDAO.updateCliente((Cliente(id: 1, nome: "joaozinho Troca Nome")));
           },)
         ],
         ),
@@ -27,7 +35,7 @@ class ClientesPage extends StatelessWidget {
 _body(context) {
   return StreamBuilder<List<Cliente>>(
     initialData: [],
-    stream: MyDatabase.instance.getAllClientes(),
+    stream: MyDatabase.instance.clienteDAO.listAll(),
     builder: (context, snapshot) {
       if(!snapshot.hasData)
       return Center(
@@ -47,8 +55,16 @@ _body(context) {
             title: Text(cli.nome),
             subtitle: Text(cli.id.toString()),
             leading: IconButton(icon: Icon(Icons.delete),onPressed: (){
-              MyDatabase.instance.deleteCliente(cli.id);
+              MyDatabase.instance.clienteDAO.removeCliente(cli.id);
             },),
+            onTap: (){
+              appData.wtlopc = "A";
+              appData.wtlCliNom = cli.nome;
+              appData.wtlCliId = cli.id;
+               Navigator.push(context, CupertinoPageRoute(builder: (context){
+              return AddClientePage();
+                 }));
+            },
           );
         },
       );
@@ -57,3 +73,5 @@ _body(context) {
 }
 
 } // fim de tudo
+
+

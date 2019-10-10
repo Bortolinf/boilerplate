@@ -9,7 +9,7 @@ class AppData {
   String wtlUsrName = ""; 
 
   String wtlopc  = "";
-  String wtlCliId = "";
+  int wtlCliId;
   String wtlCliNom = "";
   String wtlCliEnd = "";
   String wtlCliTel = "";
