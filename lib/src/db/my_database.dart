@@ -13,8 +13,17 @@ class Clientes extends Table {
 
 }
 
+
+class Configurations extends Table {
+  TextColumn get email => text()();
+  DateTimeColumn get lastSincro => dateTime()();
+  BoolColumn get lastSincroStt => boolean()();
+}
+
+
+
 // o Jacob fez algumas alteracoes aqui nesta classe para que ela fique em singleton
-@UseMoor(tables: [Produtos, Clientes])
+@UseMoor(tables: [Produtos, Clientes, Configurations])
 class MyDatabase extends _$MyDatabase {
 
   static final MyDatabase instance = MyDatabase._internal();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-alert(BuildContext context, String title, String msg,{Function callback}) {
+alert(BuildContext context, String title, String msg, retornar,{Function callback}) {
   showDialog(
     context: context,
     builder: (context) {

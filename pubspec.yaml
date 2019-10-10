@@ -29,7 +29,9 @@ dependencies:
   connectivity: ^0.4.4
   rxdart: ^0.22.3
   bloc_pattern: ^2.4.0+2
+  progress_dialog: ^1.2.0
 
+  
 
 dev_dependencies:
   flutter_test:
